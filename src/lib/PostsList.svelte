@@ -8,6 +8,7 @@
   let { modalIsVisible = $bindable() } = $props();
   let posts = $state([]);
   let isLoading = $state(false);
+  let isDeletingId = $state(null);
 
   const client = new Client();
 
@@ -50,12 +51,12 @@
 
   async function handleDeletePost(id) {
     try {
-      console.log('indeletefunction');
-      isLoading = true;
+      isDeletingId = id;
       const result = await databases.deleteDocument(dbId, collId, id);
 
-      posts.splice(post => post.id === id);
-      isLoading = false;
+      posts.filter(post => post.id !== id);
+
+      isDeletingId = null;
     } catch (err) {
       console.error(err.message);
     }
@@ -74,8 +75,15 @@
 {:else if posts.length}
   <ul class="posts">
     {#each posts as post (post.$id)}
-      <Post author={post.author} onclick={() => handleDeletePost(post.$id)}
-        >{post.body}</Post>
+      <Post author={post.author} onclick={() => handleDeletePost(post.$id)}>
+        {#if isDeletingId === post.$id}
+          <div style="text-align: center; color: white">
+            <Spinner color="white" />
+          </div>
+        {:else}
+          {post.body}
+        {/if}
+      </Post>
     {/each}
   </ul>
 {:else}
