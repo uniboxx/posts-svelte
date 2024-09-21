@@ -5,7 +5,7 @@
 <header class="header">
   <h1 class="logo">
     <!-- <MdMessage /> -->
-    React Poster
+    Svelte Poster
   </h1>
   <p>
     <button class="button" onclick={() => (modalIsVisible = true)}>
