@@ -3,6 +3,7 @@
   import NewPost from './NewPost.svelte';
   import Post from './Post.svelte';
   import { Client, Databases, ID } from 'appwrite';
+  import Spinner from './Spinner.svelte';
 
   let { modalIsVisible = $bindable() } = $props();
   let posts = $state([]);
@@ -55,7 +56,7 @@
 {/if}
 {#if isLoading}
   <div style="text-align: center; color: white">
-    <h2>Loading...</h2>
+    <Spinner color="white" />
   </div>
 {:else if posts.length}
   <ul class="posts">

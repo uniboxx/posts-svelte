@@ -1,5 +1,4 @@
 <script>
-  import { nanoid } from 'nanoid';
   import Modal from './Modal.svelte';
 
   let enteredBody = $state('');
