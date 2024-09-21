@@ -34,7 +34,7 @@
     getPosts();
   });
 
-  async function onCreateNewPost(data) {
+  async function handleCreateNewPost(data) {
     const id = ID.unique();
     try {
       isLoading = true;
@@ -47,11 +47,24 @@
       console.log(err.message);
     }
   }
+
+  async function handleDeletePost(id) {
+    try {
+      console.log('indeletefunction');
+      isLoading = true;
+      const result = await databases.deleteDocument(dbId, collId, id);
+
+      posts.splice(post => post.id === id);
+      isLoading = false;
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 </script>
 
 {#if modalIsVisible}
   <Modal bind:modalIsVisible>
-    <NewPost bind:modalIsVisible {onCreateNewPost} />
+    <NewPost bind:modalIsVisible {handleCreateNewPost} />
   </Modal>
 {/if}
 {#if isLoading}
@@ -61,7 +74,8 @@
 {:else if posts.length}
   <ul class="posts">
     {#each posts as post (post.$id)}
-      <Post author={post.author}>{post.body}</Post>
+      <Post author={post.author} onclick={() => handleDeletePost(post.$id)}
+        >{post.body}</Post>
     {/each}
   </ul>
 {:else}

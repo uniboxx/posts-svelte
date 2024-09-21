@@ -4,7 +4,7 @@
   let enteredBody = $state('');
   let enteredAuthor = $state('');
 
-  let { modalIsVisible = $bindable(), onCreateNewPost } = $props();
+  let { modalIsVisible = $bindable(), handleCreateNewPost } = $props();
 
   function handleClearFields() {
     enteredAuthor = '';
@@ -18,7 +18,7 @@
 
     // console.log(formData);
 
-    onCreateNewPost(formData);
+    handleCreateNewPost(formData);
     handleClearFields();
     modalIsVisible = false;
   }

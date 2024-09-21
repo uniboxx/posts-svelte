@@ -1,8 +1,8 @@
 <script>
-  const { author,children } = $props();
+  const { author,children,onclick } = $props();
 </script>
 
-<div class="post">
+<div class="post" {onclick}>
   <p class="author">{author}</p>
   <p class="text">{@render children()}</p>
 </div>
