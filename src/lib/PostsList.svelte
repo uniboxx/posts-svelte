@@ -54,8 +54,9 @@
       isDeletingId = id;
       const result = await databases.deleteDocument(dbId, collId, id);
 
-      posts.filter(post => post.id !== id);
-
+      const index = posts.findIndex(post => post.$id === id);
+      posts.splice(index, 1);
+      console.log(deleted);
       isDeletingId = null;
     } catch (err) {
       console.error(err.message);
