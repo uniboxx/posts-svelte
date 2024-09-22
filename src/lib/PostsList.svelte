@@ -2,7 +2,7 @@
   import Modal from './Modal.svelte';
   import NewPost from './NewPost.svelte';
   import Post from './Post.svelte';
-  import { Client, Databases, ID } from 'appwrite';
+  import { Client, Databases, ID, Query } from 'appwrite';
   import Spinner from './Spinner.svelte';
 
   let { modalIsVisible = $bindable() } = $props();
@@ -23,8 +23,10 @@
     async function getPosts() {
       try {
         isLoading = true;
-        const result = await databases.listDocuments(dbId, collId);
-        console.log(result);
+        const result = await databases.listDocuments(dbId, collId, [
+          Query.orderDesc('$createdAt'),
+        ]);
+        // console.log(result);
 
         posts = result.documents;
         isLoading = false;
