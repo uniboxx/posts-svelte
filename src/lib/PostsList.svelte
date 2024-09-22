@@ -58,7 +58,6 @@
 
       const index = posts.findIndex(post => post.$id === id);
       posts.splice(index, 1);
-      console.log(deleted);
       isDeletingId = null;
     } catch (err) {
       console.error(err.message);
