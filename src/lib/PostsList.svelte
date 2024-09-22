@@ -23,10 +23,10 @@
     async function getPosts() {
       try {
         isLoading = true;
-        const results = await databases.listDocuments(dbId, collId);
-        // console.log(posts.documents);
+        const result = await databases.listDocuments(dbId, collId);
+        console.log(result);
 
-        posts = results.documents;
+        posts = result.documents;
         isLoading = false;
       } catch (err) {
         console.error(err.message);
@@ -41,7 +41,7 @@
       isLoading = true;
       const result = await databases.createDocument(dbId, collId, id, data);
       const newPost = { ...data, $id: id };
-      // console.log(result);
+      console.log(result);
       posts.unshift(newPost);
       isLoading = false;
     } catch (err) {
