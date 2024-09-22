@@ -43,7 +43,7 @@
       isLoading = true;
       const result = await databases.createDocument(dbId, collId, id, data);
       const newPost = { ...data, $id: id };
-      console.log(result);
+      // console.log(result);
       posts.unshift(newPost);
       isLoading = false;
     } catch (err) {
